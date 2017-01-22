@@ -9,20 +9,20 @@ package com.example.android.quakereport;
 
 public class Earthquake {
     //Magnitude of earthquake
-    private Double mMagnitude;
+    private String mMagnitude;
     //Location of earthquake
     private String mLocation;
     //Date earthquake occured
     private String mDate;
 
-    public Earthquake(Double magnitude, String location, String date){
+    public Earthquake(String magnitude, String location, String date){
         mMagnitude = magnitude;
         mLocation = location;
         mDate = date;
     }
 
     // get the magnitude of earthquake
-    public  Double getMagnitude(){
+    public  String getMagnitude(){
         return mMagnitude;
     }
 
