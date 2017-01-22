@@ -10,8 +10,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
+import static com.example.android.quakereport.R.id.date;
 import static com.example.android.quakereport.R.id.magnitude;
 
 /**
@@ -52,17 +56,25 @@ public final class QueryUtils {
         // is formatted, a JSONException exception object will be thrown.
         // Catch the exception so the app doesn't crash, and print the error message to the logs.
         try {
+            //Create a JSON object from the SAMPLE_JSON_RESPONSE
             JSONObject root = new JSONObject(SAMPLE_JSON_RESPONSE);
+            //Extract JSON array associated with the key features
             JSONArray earthquakesArray = root.getJSONArray("features");
+            //Loop through earthquakes in earthquakeArray and extract magnitude, location & time
             int arrayLength = earthquakesArray.length();
             for (int i = 0; i < arrayLength; i++) {
+                //Access current earthquake object
                 JSONObject currentEarthquake = earthquakesArray.getJSONObject(i);
+                //Acees properties of current earthquake
                 JSONObject properties = currentEarthquake.getJSONObject("properties");
+                //extract primitive values from properties object
                 String magnitude = properties.getString("mag");
                 String location = properties.getString("place");
-                String time = properties.getString("time");
+                long timeInMilliseconds = properties.getLong("time");
 
-                earthquakes.add(new Earthquake(magnitude, location, time));
+                //create new earthquake object with propertoes magnitude, location and time
+                // obtained from loop
+                earthquakes.add(new Earthquake(magnitude, location, timeInMilliseconds));
             }
 
 
