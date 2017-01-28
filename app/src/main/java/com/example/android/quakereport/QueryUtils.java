@@ -10,13 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
-
-import static com.example.android.quakereport.R.id.date;
-import static com.example.android.quakereport.R.id.magnitude;
 
 /**
  * Helper methods related to requesting and receiving earthquake data from USGS.
