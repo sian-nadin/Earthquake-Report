@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -22,6 +21,8 @@ import java.util.Date;
 * based on a data source, which is a list of Earthquake objects.
 * */
 public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
+
+    private static final String LOCATION_SEPARATOR = " of ";
 
     /**
      * This is our own custom constructor (it doesn't mirror a superclass constructor).
@@ -66,17 +67,37 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         // set this text on the magnitude TextView
         magnitudeTextView.setText(currentEarthquake.getMagnitude());
 
+        // Get the location from the current Earthquake object
+        //Split location in to two separate strings - a distance & a primary location
+        // e.g. "17km SE of" and "London"
+        String locationData = currentEarthquake.getLocation();
+        String distanceFrom;
+        String primaryLocation;
+
+        if (locationData.contains(LOCATION_SEPARATOR)) {
+            // Split it.
+            String[] locationParts = locationData.split(LOCATION_SEPARATOR);
+            distanceFrom = locationParts[0] + LOCATION_SEPARATOR; // Will say e.g. 5km SE of
+            primaryLocation = locationParts[1]; // e.g. Tokyo
+        } else {
+            distanceFrom = getContext().getString(R.string.near_the); // Will say e.g. 5km SE of
+            primaryLocation = locationData; // e.g. Tokyo
+        }
+
+        // Find the TextView in the list_item.xml layout with the ID distance_location
+        TextView distanceLocationTextView = (TextView) listItemView.findViewById(R.id.distance_location);
+        // Get distance from locationParts array & set this text on the distance location TextView
+        distanceLocationTextView.setText(distanceFrom);
+
         // Find the TextView in the list_item.xml layout with the ID location
-        TextView locationTextView = (TextView) listItemView.findViewById(R.id.location);
-        // Get the location from the current Earthquake object and
-        // set this text on the location TextView
-        locationTextView.setText(currentEarthquake.getLocation());
+        TextView primaryLocationTextView = (TextView) listItemView.findViewById(R.id.primary_location);
+        // Get primary location from locationParts array & set this text on the primary location TextView
+        primaryLocationTextView.setText(primaryLocation);
+
 
         //Create a new date object from the time in milliseconds
         Date dateObject = new Date(currentEarthquake.getTimeInMilliseconds());
-
-
-
+        
         // Find the TextView in the list_item.xml layout with the ID date
         TextView dateTextView = (TextView) listItemView.findViewById(R.id.date);
         //Format the date String
