@@ -68,7 +68,7 @@ public final class QueryUtils {
                 //Acees properties of current earthquake
                 JSONObject properties = currentEarthquake.getJSONObject("properties");
                 //extract primitive values from properties object
-                String magnitude = properties.getString("mag");
+                double magnitude = properties.getDouble("mag");
                 String location = properties.getString("place");
                 long timeInMilliseconds = properties.getLong("time");
 
