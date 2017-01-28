@@ -3,8 +3,14 @@ package com.example.android.quakereport;
 /**
  * Created by Sian on 22/01/2017.
  *
- * Earthquake represents a single earthquake that has occured
- * Each object has 3 properties: the magnitude, location & date
+ *
+ * Constructs a new Earthquake object.
+ *
+ * magnitude is the magnitude (size) of the earthquake
+ * location is the location where the earthquake happened
+ * timeInMilliseconds is the time in milliseconds (from the Epoch) when the
+ *                           earthquake happened
+ * url is the website URL to find more details about the earthquake
  */
 
 public class Earthquake {
@@ -14,13 +20,17 @@ public class Earthquake {
     private String mLocation;
     //Date earthquake occured
     private String mDate;
-    /** Time of the earthquake */
+    // Time of the earthquake
     private long mTimeInMilliseconds;
+    //URL of earthquake
+    private String mURL;
 
-    public Earthquake(double magnitude, String location, long timeInMilliseconds){
+
+    public Earthquake(double magnitude, String location, long timeInMilliseconds, String url){
         mMagnitude = magnitude;
         mLocation = location;
         mTimeInMilliseconds = timeInMilliseconds;
+        mURL = url;
     }
 
     // get the magnitude of earthquake
@@ -37,6 +47,9 @@ public class Earthquake {
     public long getTimeInMilliseconds() {
         return mTimeInMilliseconds;
     }
+
+    //get URL for earthquake
+    public String getURL() {return  mURL;}
 
 
 }
