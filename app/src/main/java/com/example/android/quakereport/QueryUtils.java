@@ -38,6 +38,13 @@ public final class QueryUtils {
      */
     public static List<Earthquake> extractJsonEarthquakes(String earthquakeJSON) {
 
+// Test the loading spinner works
+//        try {
+//            Thread.sleep(2000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+
         // If the JSON string is empty or null, then return early.
         if (TextUtils.isEmpty(earthquakeJSON)) {
             return null;
